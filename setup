@@ -1,0 +1,44 @@
+#!/bin/bash
+set -e
+VERSION="1.0.1"
+AUTHOR="fgirolami29"
+MODULE_NAME="TORCHIA_HOME"
+
+REPO_URL="https://github.com/fgirolami29/pytorchia-home"
+INSTALL_DIR="$HOME/.pytorchia"
+RAW_URL="https://raw.githubusercontent.com/fgirolami29/pytorchia-home/main"
+
+echo -e "📦 MODULE: $MODULE_NAME - AUTHOR: $AUTHOR VERSION: V$VERSION\n REPO_URL: $REPO_URL \n"
+echo -e "📦 Installazione PyTorchia home da repo ufficiale..."
+
+mkdir -p "$INSTALL_DIR"
+cd "$INSTALL_DIR"
+
+# Scarica i file essenziali
+for file in embl_bash.sh emblflag emblsmall; do
+    echo "⬇️  Download $file..."
+    curl -sSfL "$RAW_URL/$file" -o "$file"
+    chmod +x "$file"
+done
+
+# Setup in .bashrc/.zshrc
+for rc in .bashrc .zshrc; do
+    file="$HOME/$rc"
+    [[ -f "$file" ]] || touch "$file"
+
+    # Rimuove vecchie definizioni
+    sed -i '/^[^#]*TORCHIA_HOME=/d' "$file"
+    sed -i '/^[^#]*source .*embl_bash\.sh/d' "$file"
+
+    # Inserisce sempre in fondo
+    echo "export TORCHIA_HOME=\"$INSTALL_DIR\"" >> "$file"
+    # shellcheck disable=SC2016
+    echo '[[ $- == *i* ]] && source "$TORCHIA_HOME/embl_bash.sh"' >> "$file"
+done
+
+
+echo -e "\n✅ Installazione completata. Riavvia il terminale o esegui:"
+echo -e "   source ~/.bashrc  oppure  source ~/.zshrc "
+
+# shellcheck disable=SC2016
+echo -e ' # ADD TO TOP OF MODULES FOR INVOKE br_flag()  > [[ $- == *i* ]] && source \"$PYTORCHIA_HOME/embl_bash.sh\" '
