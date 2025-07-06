@@ -57,13 +57,13 @@ echo -e "   source ~/.bashrc  oppure  source ~/.zshrc"
 ### 🚀 **Esecuzione rapida via `wget` o `curl`**
 
 ```bash
-bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh)
+bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v1.0.1/install.sh)
 ```
 
 oppure
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh | bash
+wget -qO- https://github.com/fgirolami29/pytorchia_home/releases/download/v1.0.1/install.sh | bash
 ```
 
 ---
@@ -78,7 +78,7 @@ Setup rapido per prompt ANSI, funzioni utili, e branding Pytorchia™.
 ## 🧪 Installazione automatica
 
 ```bash
-bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh)
+bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v1.0.1/install.sh)
 ````
 
 ## 🖼 Contenuto

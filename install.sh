@@ -4,9 +4,9 @@ VERSION="1.0.1"
 AUTHOR="fgirolami29"
 MODULE_NAME="TORCHIA_HOME"
 
-REPO_URL="https://github.com/fgirolami29/pytorchia-home"
+REPO_URL="https://github.com/fgirolami29/pytorchia_home"
 INSTALL_DIR="$HOME/.pytorchia"
-RAW_URL="https://raw.githubusercontent.com/fgirolami29/pytorchia-home/main"
+RAW_URL="https://github.com/fgirolami29/pytorchia_home/releases/download/v$VERSION"
 
 echo -e "📦 MODULE: $MODULE_NAME - AUTHOR: $AUTHOR VERSION: V$VERSION\n REPO_URL: $REPO_URL \n"
 echo -e "📦 Installazione PyTorchia home da repo ufficiale..."
@@ -15,10 +15,22 @@ mkdir -p "$INSTALL_DIR"
 cd "$INSTALL_DIR"
 
 # Scarica i file essenziali
-for file in embl_bash.sh emblflag emblsmall; do
+for file in embl_bash.sh emblems.zip; do
     echo "⬇️  Download $file..."
-    curl -sSfL "$RAW_URL/$file" -o "$file"
-    chmod +x "$file"
+    curl -sSfL "$RAW_URL/$file" -o "$file" || {
+        echo "❌ Errore nel download di $file"
+        exit 1
+    }
+
+    if [[ "$file" == "embl_bash.sh" ]]; then
+        chmod +x "$file"
+    elif [[ "$file" == "emblems.zip" ]]; then
+        unzip -o "$file" -d . || {
+            echo "❌ Errore nell'estrazione di $file"
+            exit 1
+        }
+        rm "$file"
+    fi
 done
 
 # Setup in .bashrc/.zshrc
