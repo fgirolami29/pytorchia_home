@@ -25,7 +25,7 @@ set -e
 
 REPO_URL="https://github.com/fgirolami29/pytorchia_home"
 INSTALL_DIR="$HOME/.pytorchia"
-RAW_URL="https://raw.githubusercontent.com/fgirolami29/pytorchia_home/main"
+RAW_URL="https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main"
 
 echo -e "📦 Installazione PyTorchia home da repo ufficiale..."
 
@@ -57,13 +57,13 @@ echo -e "   source ~/.bashrc  oppure  source ~/.zshrc"
 ### 🚀 **Esecuzione rapida via `wget` o `curl`**
 
 ```bash
-bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/main/install.sh)
+bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh)
 ```
 
 oppure
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/fgirolami29/pytorchia_home/main/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh | bash
 ```
 
 ---
@@ -78,7 +78,7 @@ Setup rapido per prompt ANSI, funzioni utili, e branding Pytorchia™.
 ## 🧪 Installazione automatica
 
 ```bash
-bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/main/install.sh)
+bash <(curl -sSfL https://raw.githubusercontent.com/fgirolami29/pytorchia_home/refs/heads/main/install.sh)
 ````
 
 ## 🖼 Contenuto
