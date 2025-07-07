@@ -2,6 +2,8 @@
 
 Setup rapido per prompt ANSI, funzioni utili e branding Pytorchia™.
 
+![Pytorchia Certified™](https://img.shields.io/badge/Pytorchia%E2%84%A2-Certified-29abe2?style=for-the-badge&logo=github)
+
 ---
 
 ## 📁 Struttura della repo `pytorchia_home`
