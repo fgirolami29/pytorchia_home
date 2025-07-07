@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-BR_VERSION="1.5.1"
+BR_VERSION="1.5.2"
 AUTHOR="fgirolami29"
 MODULE_NAME="TORCHIA_HOME"
 

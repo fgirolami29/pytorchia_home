@@ -24,6 +24,7 @@ RELEASE_TITLE="PyTorchia™ Tools"
 # Estrai versione corrente
 VERSION=$(grep 'BR_VERSION="' "$VERSION_FILE" | sed -E 's/.*BR_VERSION="([^"]*)".*/\1/')
 RELEASE_DIR="$REPO_BASEPATH/release/v$VERSION"
+RELEASE_NOTES="$RELEASE_DIR/release_notes.md"
 
 # --------------------------------------------------------
 # SYNC README
@@ -120,12 +121,39 @@ if ! gh auth status >/dev/null 2>&1; then
 fi
 
 
+# Genera i release notes con installazione automatica
+cat > "$RELEASE_NOTES" <<EOF
+---
+
+## 🧪 Installazione automatica
+
+\`\`\`bash
+bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v$VERSION/install.sh)
+\`\`\`
+
+Oppure:
+
+\`\`\`bash
+wget -qO- https://github.com/fgirolami29/pytorchia_home/releases/download/v$VERSION/install.sh | bash
+\`\`\`
+EOF
+
+
 # --------------------------------------------------------
 # PUBBLICAZIONE GITHUB
 # --------------------------------------------------------
 echo -e "\n🚀 ${GREEN}Pubblicazione release su GitHub...${NC}"
-gh release create "v$VERSION" "$RELEASE_DIR"/* \
+
+# Crea array di file da caricare, escludendo release_notes.md
+ASSET_FILES=()
+for file in "$RELEASE_DIR"/*; do
+    [[ "$(basename "$file")" == "release_notes.md" ]] && continue
+    ASSET_FILES+=("$file")
+done
+
+gh release create "v$VERSION" "${ASSET_FILES[@]}" \
     -t "v$VERSION" \
-    -n "$RELEASE_TITLE v$VERSION"
+    -n "$RELEASE_TITLE v$VERSION" \
+    --notes-file "$RELEASE_NOTES"
 
 echo -e "\n✅ ${GREEN}Release v$VERSION pubblicata con successo!${NC}"
