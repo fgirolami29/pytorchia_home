@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
-VERSION="1.0.1"
+BR_VERSION="1.5.1"
 AUTHOR="fgirolami29"
 MODULE_NAME="TORCHIA_HOME"
 
 REPO_URL="https://github.com/fgirolami29/pytorchia_home"
 INSTALL_DIR="$HOME/.pytorchia"
-RAW_URL="https://github.com/fgirolami29/pytorchia_home/releases/download/v$VERSION"
+RAW_URL="https://github.com/fgirolami29/pytorchia_home/releases/download/v$BR_VERSION"
 
-echo -e "📦 MODULE: $MODULE_NAME - AUTHOR: $AUTHOR VERSION: V$VERSION\n REPO_URL: $REPO_URL \n"
+echo -e "📦 MODULE: $MODULE_NAME - AUTHOR: $AUTHOR VERSION: V$BR_VERSION\n REPO_URL: $REPO_URL \n"
 echo -e "📦 Installazione PyTorchia home da repo ufficiale..."
 
 mkdir -p "$INSTALL_DIR"
