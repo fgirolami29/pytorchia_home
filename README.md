@@ -63,8 +63,12 @@ br_flag "" "" "" 0.7 left
 
 ## 🧪 Installazione automatica
 
-```bash
-bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.2/install.sh)
+```bash # maybe use with sudo or try next installer CMD
+URL="https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.2/install.sh"
+(bash <(curl -sSfL "$URL") || bash <(wget -qO- "$URL")) || {
+  echo -e "\033[91m❌ Errore: impossibile scaricare lo script da $URL\033[0m"
+  exit 1
+}
 ```
 
 Oppure:
