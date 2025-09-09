@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
-BR_VERSION="1.5.2"
+set -eup
+BR_VERSION="1.5.3"
 AUTHOR="fgirolami29"
 MODULE_NAME="TORCHIA_HOME"
 
@@ -35,17 +35,24 @@ done
 
 # Setup in .bashrc/.zshrc
 for rc in .bashrc .zshrc; do
-    file="$HOME/$rc"
-    [[ -f "$file" ]] || touch "$file"
+  file="$HOME/$rc"
+  [[ -f "$file" ]] || : > "$file"
 
-    # Rimuove vecchie definizioni
-    sed -i '/^[^#]*TORCHIA_HOME=/d' "$file"
-    sed -i '/^[^#]*source .*embl_bash\.sh/d' "$file"
+  tmp="${file}.tmp.$$"
+  # Rimuove solo righe non commentate con TORCHIA_HOME= e qualsiasi riga con embl_bash.sh
+  awk 'BEGIN{del1=0; del2=0}
+       /^[[:space:]]*[^#].*TORCHIA_HOME=/ {next}
+       /embl_bash\.sh/                   {next}
+       {print}' "$file" > "$tmp" && mv "$tmp" "$file"
 
-    # Inserisce sempre in fondo
-    echo "export TORCHIA_HOME=\"$INSTALL_DIR\"" >> "$file"
+  {
+    echo
+    echo '# >>> pytorchia-emblems >>>'
+    echo "export TORCHIA_HOME=\"$INSTALL_DIR\""
     # shellcheck disable=SC2016
-    echo '[[ $- == *i* ]] && source "$TORCHIA_HOME/embl_bash.sh"' >> "$file"
+    echo '[[ $- == *i* ]] && source "$TORCHIA_HOME/embl_bash.sh"'
+    echo '# <<< pytorchia-emblems <<<'
+  } >> "$file"
 done
 
 
@@ -53,4 +60,4 @@ echo -e "\n✅ Installazione completata. Riavvia il terminale o esegui:"
 echo -e "   source ~/.bashrc  oppure  source ~/.zshrc "
 
 # shellcheck disable=SC2016
-echo -e ' # ADD TO TOP OF MODULES FOR INVOKE br_flag()  > [[ $- == *i* ]] && source \"$PYTORCHIA_HOME/embl_bash.sh\" '
+echo -e ' # ADD TO TOP OF MODULES FOR INVOKE br_flag()  > [[ $- == *i* ]] && source \"$TORCHIA_HOME/embl_bash.sh\" '

@@ -64,13 +64,13 @@ br_flag "" "" "" 0.7 left
 ## 🧪 Installazione automatica
 
 ```bash
-bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.2/install.sh)
+bash <(curl -sSfL https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.3/install.sh)
 ```
 
 Oppure:
 
 ```bash
-wget -qO- https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.2/install.sh | bash
+wget -qO- https://github.com/fgirolami29/pytorchia_home/releases/download/v1.5.3/install.sh | bash
 ```
 
 ---
