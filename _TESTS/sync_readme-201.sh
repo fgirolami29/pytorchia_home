@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-SYNC_VERSION="2.0.0"
+SYNC_VERSION="2.0.1"
 # --------------------------------------------------------
 # Script: sync_readme.sh
 # Descrizione: Aggiorna il README.md con la versione corrente
@@ -180,20 +180,14 @@ if [[ -z "$TARGET_VER" ]]; then
         TARGET_VER="$EMBL_VER"
     fi
 else
-    # Valuta il confronto semver: -1 => EMBL_VER < TARGET_VER, 0 => uguale, 1 => EMBL_VER > TARGET_VER
+    # è stata passata una nuova versione: deve essere > EMBL_VER
     cmp="$(semver_compare "$EMBL_VER" "$TARGET_VER")"
-    case "$cmp" in
-    -1)
-        ok "Nuova versione accettata: ${TARGET_VER} (>${EMBL_VER})"
-        ;;
-    0)
-        warn "Versione identica: ${TARGET_VER} == ${EMBL_VER}. Procedo comunque (sync idempotente)."
-        ;;
-    1)
-        warn "Versione inferiore: ${TARGET_VER} < ${EMBL_VER}. Procedo comunque (downgrade volontario)."
-        ;;
-    esac
+    if [[ "$cmp" -ge 0 ]]; then
+        die "La nuova versione (${TARGET_VER}) non è maggiore della corrente (${EMBL_VER})."
+    fi
+    ok "Nuova versione accettata: ${TARGET_VER} (>${EMBL_VER})"
 fi
+
 
 # Aggiorna file a TARGET_VER
 update_readme_links "$TARGET_VER"

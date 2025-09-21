@@ -66,8 +66,8 @@ fi
 # --------------------------------------------------------
 # COPIA FILE CORE
 # --------------------------------------------------------
-echo -e "📥 ${CYAN}Copia file:${NC} install.sh, embl_bash.sh"
-cp "$REPO_BASEPATH/install.sh" "$REPO_BASEPATH/embl_bash.sh" "$RELEASE_DIR/"
+echo -e "📥 ${CYAN}Copia file:${NC} install.sh, install-torchia-bearer.sh, embl_bash.sh"
+cp "$REPO_BASEPATH/install.sh" "$REPO_BASEPATH/embl_bash.sh" "$REPO_BASEPATH/install-torchia-bearer.sh" "$RELEASE_DIR/"
 
 # --------------------------------------------------------
 # INFO COMPLETAMENTO LOCALE
@@ -120,9 +120,8 @@ if ! gh auth status >/dev/null 2>&1; then
     fi
 fi
 
-
 # Genera i release notes con installazione automatica
-cat > "$RELEASE_NOTES" <<EOF
+cat >"$RELEASE_NOTES" <<EOF
 ---
 
 ## 🧪 Installazione automatica
@@ -137,7 +136,6 @@ Oppure:
 wget -qO- https://github.com/fgirolami29/pytorchia_home/releases/download/v$VERSION/install.sh | bash
 \`\`\`
 EOF
-
 
 # --------------------------------------------------------
 # PUBBLICAZIONE GITHUB
