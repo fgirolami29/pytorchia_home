@@ -11,7 +11,7 @@ set -euo pipefail
 # -------------------------
 # Metadati / Config
 # -------------------------
-BR_VERSION="1.5.6"
+BR_VERSION="1.5.7"
 AUTHOR="fgirolami29"
 MODULE_NAME="TORCHIA_HOME"
 PRETTY_NAME="PyTorchia Home"
